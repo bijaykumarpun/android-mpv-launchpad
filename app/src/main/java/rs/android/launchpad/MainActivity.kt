@@ -1,6 +1,7 @@
 package rs.android.launchpad
 
 import android.os.Bundle
+import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
@@ -44,7 +45,15 @@ class MainActivity : ComponentActivity() {
                             HomeScreen(
                                 message = homeViewModel.message.collectAsState().value,
                                 onTappedMessage = {
-                                    safeNavigateTo(navController, AppRoutes.SETTINGS_SCREEN)
+                                    if (homeViewModel.isFeatureEnabled.value) {
+                                        safeNavigateTo(navController, AppRoutes.SETTINGS_SCREEN)
+                                    } else {
+                                        Toast.makeText(
+                                            this@MainActivity,
+                                            "Feature not enabled",
+                                            Toast.LENGTH_SHORT
+                                        ).show()
+                                    }
                                 })
                         }
 
