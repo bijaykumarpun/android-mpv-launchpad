@@ -22,9 +22,11 @@ import rs.android.launchpad.models.ClickAction
 import rs.android.launchpad.models.RemoteFeature
 import rs.android.launchpad.ui.routes.AppRoutes
 import rs.android.launchpad.ui.screen.HomeScreen
+import rs.android.launchpad.ui.screen.PaywallScreen
 import rs.android.launchpad.ui.screen.SettingsScreen
 import rs.android.launchpad.ui.theme.MVPTheme
 import rs.android.launchpad.vm.HomeViewModel
+import rs.android.launchpad.vm.PaywallViewModel
 import rs.android.launchpad.vm.SettingsViewModel
 
 @AndroidEntryPoint
@@ -69,6 +71,9 @@ class MainActivity : ComponentActivity() {
                                         )
                                     }
 
+                                },
+                                onPaywallTapped = {
+                                    safeNavigateTo(navController, AppRoutes.PAYWALL_SCREEN)
                                 })
                         }
 
@@ -79,6 +84,18 @@ class MainActivity : ComponentActivity() {
                                 onTappedMessage = {
                                     popBacksStackSafely(navController)
                                 })
+                        }
+
+                        composable(route = AppRoutes.PAYWALL_SCREEN) {
+                            val paywallViewModel: PaywallViewModel = hiltViewModel()
+                            PaywallScreen(
+                                isUserPro = paywallViewModel.isUserPro.collectAsState().value,
+                                message = paywallViewModel.message.collectAsState().value,
+                                onPurchaseTapped = { paywallViewModel.onPurchaseTapped(this@MainActivity) },
+                                onTappedMessage = {
+                                    popBacksStackSafely(navController)
+                                }
+                            )
                         }
                     }
                 }

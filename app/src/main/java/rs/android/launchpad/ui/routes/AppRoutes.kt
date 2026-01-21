@@ -4,5 +4,6 @@ sealed interface AppRoutes {
     companion object {
         const val HOME_SCREEN = "home"
         const val SETTINGS_SCREEN = "settings"
+        const val PAYWALL_SCREEN = "paywall"
     }
 }
