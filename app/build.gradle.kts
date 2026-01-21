@@ -6,25 +6,42 @@ plugins {
 
 android {
     namespace = "rs.android.launchpad"
-    compileSdk = 35
+    compileSdk = 36
+    val appName = "MVP Launchpad"
 
     defaultConfig {
         applicationId = "rs.android.launchpad"
         minSdk = 24
-        targetSdk = 35
+        targetSdk = 36
         versionCode = 1
         versionName = "0.1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
+    signingConfigs {
+        create("release") {
+            storePassword = ""
+            keyAlias = ""
+            keyPassword = ""
+            storeFile = file("${rootDir}/keystore/keystore")
+        }
+    }
+
     buildTypes {
         release {
-            isMinifyEnabled = false
+            isMinifyEnabled = true
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
+            signingConfig = signingConfigs.getByName("release")
+            resValue("string", "app_name", appName)
+        }
+        debug {
+            applicationIdSuffix = ".debug"
+            versionNameSuffix = "-DEBUG"
+            resValue("string", "app_name", "$appName Debug")
         }
     }
     compileOptions {
