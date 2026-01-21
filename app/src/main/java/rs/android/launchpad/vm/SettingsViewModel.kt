@@ -7,7 +7,9 @@ import kotlinx.coroutines.flow.StateFlow
 import javax.inject.Inject
 
 @HiltViewModel
-class SettingsViewModel @Inject constructor() : ViewModel() {
+class SettingsViewModel @Inject constructor(
+) : ViewModel() {
     private val _message: MutableStateFlow<String> = MutableStateFlow("Hello from Settings Screen!")
     val message: StateFlow<String> = _message
+
 }

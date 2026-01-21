@@ -1,5 +1,6 @@
 package rs.android.launchpad
 
+import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
 import androidx.activity.ComponentActivity
@@ -10,12 +11,15 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
+import androidx.core.net.toUri
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import dagger.hilt.android.AndroidEntryPoint
+import rs.android.launchpad.models.ClickAction
+import rs.android.launchpad.models.RemoteFeature
 import rs.android.launchpad.ui.routes.AppRoutes
 import rs.android.launchpad.ui.screen.HomeScreen
 import rs.android.launchpad.ui.screen.SettingsScreen
@@ -54,6 +58,17 @@ class MainActivity : ComponentActivity() {
                                             Toast.LENGTH_SHORT
                                         ).show()
                                     }
+                                },
+                                bottomCtaTitle = homeViewModel.bottomRemoteFeature.collectAsState().value?.title
+                                    ?: "",
+                                onBottomCtaTapped = {
+                                    homeViewModel.bottomRemoteFeature.value?.let {
+                                        handleRemoteFeature(
+                                            navController,
+                                            it
+                                        )
+                                    }
+
                                 })
                         }
 
@@ -109,6 +124,45 @@ class MainActivity : ComponentActivity() {
             navController.popBackStack()
         }
     }
+
+
+    fun handleRemoteFeature(navController: NavController, feature: RemoteFeature) {
+        when (feature.clickAction) {
+            ClickAction.None -> {}
+            ClickAction.NavigateToLocalScreen
+                -> {
+                try {
+                    safeNavigateTo(navController = navController, route = feature.data)
+                } catch (e: Exception) {
+                    e.printStackTrace()
+                }
+            }
+
+            ClickAction.NavigateToPlayStore -> {
+                try {
+                    openAppInPlayStore(feature.data)
+                } catch (e: Exception) {
+                    e.printStackTrace()
+                }
+            }
+        }
+
+    }
+
+    fun openAppInPlayStore(packageName: String) {
+        val intent = Intent(
+            Intent.ACTION_VIEW,
+            "market://details?id=${packageName}".toUri()
+        ).apply {
+            setPackage("com.android.vending")
+        }
+        try {
+            startActivity(intent)
+        } catch (e: Exception) {
+            // Ignore
+        }
+    }
+
 }
 
 
