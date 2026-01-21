@@ -14,9 +14,28 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import rs.android.launchpad.ui.components.PageScaffold
 
 @Composable
 fun PaywallScreen(
+    isUserPro: Boolean,
+    message: String,
+    onTappedMessage: () -> Unit,
+    onPurchaseTapped: () -> Unit
+) {
+    PageScaffold(content = {
+        PaywallScreenContent(
+            isUserPro = isUserPro,
+            message = message,
+            onTappedMessage = onTappedMessage,
+            onPurchaseTapped = onPurchaseTapped
+        )
+    })
+}
+
+
+@Composable
+private fun PaywallScreenContent(
     isUserPro: Boolean,
     message: String,
     onTappedMessage: () -> Unit,
@@ -33,7 +52,7 @@ fun PaywallScreen(
                     .padding(12.dp)
                     .clickable { onTappedMessage.invoke() })
             Spacer(modifier = Modifier.height(12.dp))
-            if(isUserPro.not()){
+            if (isUserPro.not()) {
                 Text(
                     "Purchase", modifier = Modifier
                         .padding(12.dp)

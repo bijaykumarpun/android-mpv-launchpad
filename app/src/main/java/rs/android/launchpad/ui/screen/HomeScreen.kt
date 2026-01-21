@@ -14,6 +14,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import rs.android.launchpad.ui.components.PageScaffold
+import rs.android.launchpad.ui.components.RateAppButton
 
 @Composable
 fun HomeScreen(
@@ -21,12 +23,39 @@ fun HomeScreen(
     onTappedMessage: () -> Unit,
     bottomCtaTitle: String,
     onBottomCtaTapped: () -> Unit,
-    onPaywallTapped: () -> Unit
+    onPaywallTapped: () -> Unit,
+    onRateAppTapped: () -> Unit
+) {
+    PageScaffold(content = {
+        HomeScreenContent(
+            message = message,
+            onTappedMessage = onTappedMessage,
+            bottomCtaTitle = bottomCtaTitle,
+            onBottomCtaTapped = onBottomCtaTapped,
+            onPaywallTapped = onPaywallTapped,
+            onRateAppTapped = onRateAppTapped
+
+        )
+    })
+
+}
+
+@Composable
+private fun HomeScreenContent(
+    message: String,
+    onTappedMessage: () -> Unit,
+    bottomCtaTitle: String,
+    onBottomCtaTapped: () -> Unit,
+    onPaywallTapped: () -> Unit,
+    onRateAppTapped: () -> Unit
 ) {
     Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
-        Column(modifier = Modifier
-            .wrapContentHeight()
-            .fillMaxWidth()) {
+        Column(
+            modifier = Modifier
+                .wrapContentHeight()
+                .fillMaxWidth(),
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
             Text(
                 message, modifier = Modifier
                     .padding(12.dp)
@@ -36,13 +65,17 @@ fun HomeScreen(
                 "Paywall", modifier = Modifier
                     .padding(12.dp)
                     .clickable { onPaywallTapped.invoke() })
-        }
+            Spacer(modifier = Modifier.height(12.dp))
+            RateAppButton { onRateAppTapped.invoke() }
 
+        }
 
         Text(
             bottomCtaTitle, modifier = Modifier
                 .align(Alignment.BottomCenter)
                 .padding(24.dp)
                 .clickable { onBottomCtaTapped.invoke() })
+
     }
+
 }
