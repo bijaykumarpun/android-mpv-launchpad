@@ -91,4 +91,9 @@ dependencies {
     implementation(libs.firebase.config.ktx)
     implementation(libs.firebase.analytics) // Analytics
     implementation(libs.firebase.crashlytics) // Crashlytics
+    implementation(libs.firebase.config.ktx) // Remote Config
+
+    // Json
+    implementation(libs.kotlinx.serialization.json)
+
 }
