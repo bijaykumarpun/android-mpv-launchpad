@@ -18,6 +18,7 @@ googleServices = "4.4.3"
 firebaseCrashlytics = "3.0.6"
 
 kotlinxSerializationJson = "1.7.3"
+billingKtx = "8.0.0"
 
 
 [libraries]
@@ -46,6 +47,7 @@ firebase-config-ktx = { module = "com.google.firebase:firebase-config-ktx" }
 firebase-crashlytics = { module = "com.google.firebase:firebase-crashlytics" }
 # Json serialization
 kotlinx-serialization-json = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version.ref = "kotlinxSerializationJson" }
+billing-ktx = { module = "com.android.billingclient:billing-ktx", version.ref = "billingKtx" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

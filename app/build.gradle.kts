@@ -96,4 +96,8 @@ dependencies {
     // Json
     implementation(libs.kotlinx.serialization.json)
 
+    // Billing
+    implementation(libs.billing.ktx)
+
+
 }
