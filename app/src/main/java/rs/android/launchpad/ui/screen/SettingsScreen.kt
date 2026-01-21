@@ -10,11 +10,13 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 
+
 @Composable
-fun HomeScreen(message: String, onTappedMessage: () -> Unit) {
+fun SettingsScreen(message: String, onTappedMessage: () -> Unit) {
     Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
-        Text(message, modifier = Modifier
-            .padding(12.dp)
-            .clickable { onTappedMessage.invoke() })
+        Text(
+            message, modifier = Modifier
+                .padding(12.dp)
+                .clickable { onTappedMessage.invoke() })
     }
 }
