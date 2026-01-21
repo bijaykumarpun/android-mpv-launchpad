@@ -12,6 +12,10 @@ composeBom = "2024.09.00"
 hiltAndroid = "2.57.1"
 hiltCompiler = "2.57.1"
 hiltNavigationCompose = "1.2.0"
+# Firebase
+firebaseBom = "33.15.0"
+googleServices = "4.4.3"
+firebaseCrashlytics = "3.0.6"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -32,7 +36,11 @@ androidx-material3 = { group = "androidx.compose.material3", name = "material3" 
 hilt-android = { module = "com.google.dagger:hilt-android", version.ref = "hiltAndroid" }
 hilt-compiler = { module = "com.google.dagger:hilt-compiler", version.ref = "hiltCompiler" }
 androidx-hilt-navigation-compose = { module = "androidx.hilt:hilt-navigation-compose", version.ref = "hiltNavigationCompose" }
-
+# Firebase
+firebase-analytics = { module = "com.google.firebase:firebase-analytics" }
+firebase-bom = { module = "com.google.firebase:firebase-bom", version.ref = "firebaseBom" }
+firebase-config-ktx = { module = "com.google.firebase:firebase-config-ktx" }
+firebase-crashlytics = { module = "com.google.firebase:firebase-crashlytics" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
@@ -40,4 +48,8 @@ kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 kotlin-compose = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
 kotlin-kapt = {id = "kotlin-kapt"}
 dagger-hilt = {id = "com.google.dagger.hilt.android", version.ref = "hiltAndroid"}
+google-services = {id = "com.google.gms.google-services", version.ref = "googleServices"}
+firebase-crashlytics = {id = "com.google.firebase.crashlytics", version.ref = "firebaseCrashlytics"}
+
+
 
