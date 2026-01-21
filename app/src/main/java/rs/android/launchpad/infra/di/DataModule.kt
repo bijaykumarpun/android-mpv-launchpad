@@ -7,8 +7,10 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import rs.android.launchpad.repository.FeatureRepository
+import rs.android.launchpad.repository.ProductRepository
 import rs.android.launchpad.repository.RemoteConfigRepository
 import rs.android.launchpad.repository.impl.FeatureRepositoryImpl
+import rs.android.launchpad.repository.impl.ProductRepositoryImpl
 import rs.android.launchpad.repository.impl.RemoteConfigRepositoryImpl
 
 @Module
@@ -24,6 +26,12 @@ abstract interface DataModule {
     fun bindRemoteConfigRepository(
         remoteConfigRepositoryImpl: RemoteConfigRepositoryImpl
     ): RemoteConfigRepository
+
+
+    @Binds
+    fun bindProductRepository(
+        productRepositoryImpl: ProductRepositoryImpl
+    ): ProductRepository
 
 }
 

@@ -16,33 +16,31 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 
 @Composable
-fun HomeScreen(
+fun PaywallScreen(
+    isUserPro: Boolean,
     message: String,
     onTappedMessage: () -> Unit,
-    bottomCtaTitle: String,
-    onBottomCtaTapped: () -> Unit,
-    onPaywallTapped: () -> Unit
+    onPurchaseTapped: () -> Unit
 ) {
     Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
-        Column(modifier = Modifier
-            .wrapContentHeight()
-            .fillMaxWidth()) {
+        Column(
+            modifier = Modifier
+                .wrapContentHeight()
+                .fillMaxWidth()
+        ) {
             Text(
                 message, modifier = Modifier
                     .padding(12.dp)
                     .clickable { onTappedMessage.invoke() })
             Spacer(modifier = Modifier.height(12.dp))
-            Text(
-                "Paywall", modifier = Modifier
-                    .padding(12.dp)
-                    .clickable { onPaywallTapped.invoke() })
+            if(isUserPro.not()){
+                Text(
+                    "Purchase", modifier = Modifier
+                        .padding(12.dp)
+                        .clickable { onPurchaseTapped.invoke() })
+            }
+
         }
 
-
-        Text(
-            bottomCtaTitle, modifier = Modifier
-                .align(Alignment.BottomCenter)
-                .padding(24.dp)
-                .clickable { onBottomCtaTapped.invoke() })
     }
 }
