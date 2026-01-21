@@ -74,6 +74,9 @@ class MainActivity : ComponentActivity() {
                                 },
                                 onPaywallTapped = {
                                     safeNavigateTo(navController, AppRoutes.PAYWALL_SCREEN)
+                                },
+                                onRateAppTapped = {
+                                    openAppInPlayStore(this@MainActivity.packageName)
                                 })
                         }
 
