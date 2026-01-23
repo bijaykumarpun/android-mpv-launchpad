@@ -25,9 +25,9 @@ import rs.android.launchpad.ui.screen.HomeScreen
 import rs.android.launchpad.ui.screen.PaywallScreen
 import rs.android.launchpad.ui.screen.SettingsScreen
 import rs.android.launchpad.ui.theme.MVPTheme
-import rs.android.launchpad.vm.HomeViewModel
-import rs.android.launchpad.vm.PaywallViewModel
-import rs.android.launchpad.vm.SettingsViewModel
+import rs.android.launchpad.ui.vm.HomeViewModel
+import rs.android.launchpad.ui.vm.PaywallViewModel
+import rs.android.launchpad.ui.vm.SettingsViewModel
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {

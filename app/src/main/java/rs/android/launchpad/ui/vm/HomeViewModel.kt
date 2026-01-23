@@ -1,4 +1,4 @@
-package rs.android.launchpad.vm
+package rs.android.launchpad.ui.vm
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
