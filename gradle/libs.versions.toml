@@ -21,6 +21,9 @@ kotlinxSerializationJson = "1.7.3"
 billingKtx = "8.0.0"
 review = "2.0.2"
 
+#ksp
+ksp = "2.0.21-1.0.25"
+
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -55,10 +58,10 @@ review = { module = "com.google.android.play:review", version.ref = "review" }
 android-application = { id = "com.android.application", version.ref = "agp" }
 kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 kotlin-compose = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
-kotlin-kapt = {id = "kotlin-kapt"}
 dagger-hilt = {id = "com.google.dagger.hilt.android", version.ref = "hiltAndroid"}
 google-services = {id = "com.google.gms.google-services", version.ref = "googleServices"}
 firebase-crashlytics = {id = "com.google.firebase.crashlytics", version.ref = "firebaseCrashlytics"}
+ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
 
 
 
