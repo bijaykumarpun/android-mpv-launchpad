@@ -46,6 +46,7 @@ android {
             resValue("string", "app_name", appName)
         }
         debug {
+            isDebuggable = true
             applicationIdSuffix = ".debug"
             versionNameSuffix = "-DEBUG"
             resValue("string", "app_name", "$appName Debug")
@@ -60,6 +61,7 @@ android {
     }
     buildFeatures {
         compose = true
+        buildConfig = true
     }
 }
 

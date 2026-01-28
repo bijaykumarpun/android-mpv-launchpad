@@ -14,7 +14,7 @@ class FirebaseRemoteConfiguration {
     fun initialize() {
         remoteConfig = FirebaseRemoteConfig.getInstance()
         val configSettings = FirebaseRemoteConfigSettings.Builder()
-            .setMinimumFetchIntervalInSeconds(if (rs.android.launchpad.DEBUG) REMOTE_CONFIG_MIN_FETCH_INTERVAL_DEBUG else REMOTE_CONFIG_MIN_FETCH_INTERVAL_RELEASE)
+            .setMinimumFetchIntervalInSeconds(if (rs.android.launchpad.BuildConfig.DEBUG) REMOTE_CONFIG_MIN_FETCH_INTERVAL_DEBUG else REMOTE_CONFIG_MIN_FETCH_INTERVAL_RELEASE)
             .build()
         remoteConfig.setConfigSettingsAsync(configSettings)
         remoteConfig.setDefaultsAsync(R.xml.remote_config_defaults)
