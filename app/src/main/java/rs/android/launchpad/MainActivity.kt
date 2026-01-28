@@ -1,6 +1,5 @@
 package rs.android.launchpad
 
-import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
 import androidx.activity.ComponentActivity
@@ -11,7 +10,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
-import androidx.core.net.toUri
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import androidx.navigation.compose.NavHost
@@ -28,6 +26,7 @@ import rs.android.launchpad.ui.theme.MVPTheme
 import rs.android.launchpad.ui.vm.HomeViewModel
 import rs.android.launchpad.ui.vm.PaywallViewModel
 import rs.android.launchpad.ui.vm.SettingsViewModel
+import rs.android.launchpad.util.vendor.RatingUtils
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
@@ -76,35 +75,39 @@ class MainActivity : ComponentActivity() {
                                     safeNavigateTo(navController, AppRoutes.PAYWALL_SCREEN)
                                 },
                                 onRateAppTapped = {
-                                    openAppInPlayStore(this@MainActivity.packageName)
+                                    RatingUtils.requestInAppRating(
+                                        this@MainActivity,
+                                        fallbackToPlayStore = true
+                                    )
                                 })
-                        }
 
-                        composable(route = AppRoutes.SETTINGS_SCREEN) {
-                            val settingsViewModel: SettingsViewModel = hiltViewModel()
-                            SettingsScreen(
-                                message = settingsViewModel.message.collectAsState().value,
-                                onTappedMessage = {
-                                    popBacksStackSafely(navController)
-                                })
-                        }
+                            composable(route = AppRoutes.SETTINGS_SCREEN) {
+                                val settingsViewModel: SettingsViewModel = hiltViewModel()
+                                SettingsScreen(
+                                    message = settingsViewModel.message.collectAsState().value,
+                                    onTappedMessage = {
+                                        popBacksStackSafely(navController)
+                                    })
+                            }
 
-                        composable(route = AppRoutes.PAYWALL_SCREEN) {
-                            val paywallViewModel: PaywallViewModel = hiltViewModel()
-                            PaywallScreen(
-                                isUserPro = paywallViewModel.isUserPro.collectAsState().value,
-                                message = paywallViewModel.message.collectAsState().value,
-                                onPurchaseTapped = { paywallViewModel.onPurchaseTapped(this@MainActivity) },
-                                onTappedMessage = {
-                                    popBacksStackSafely(navController)
-                                }
-                            )
+                            composable(route = AppRoutes.PAYWALL_SCREEN) {
+                                val paywallViewModel: PaywallViewModel = hiltViewModel()
+                                PaywallScreen(
+                                    isUserPro = paywallViewModel.isUserPro.collectAsState().value,
+                                    message = paywallViewModel.message.collectAsState().value,
+                                    onPurchaseTapped = { paywallViewModel.onPurchaseTapped(this@MainActivity) },
+                                    onTappedMessage = {
+                                        popBacksStackSafely(navController)
+                                    }
+                                )
+                            }
                         }
                     }
                 }
             }
         }
     }
+
 
     /**
      * This prevents same destination from being navigated multiple times
@@ -160,7 +163,7 @@ class MainActivity : ComponentActivity() {
 
             ClickAction.NavigateToPlayStore -> {
                 try {
-                    openAppInPlayStore(feature.data)
+                    RatingUtils.openAppInPlayStore(this@MainActivity, feature.data)
                 } catch (e: Exception) {
                     e.printStackTrace()
                 }
@@ -168,22 +171,10 @@ class MainActivity : ComponentActivity() {
         }
 
     }
-
-    fun openAppInPlayStore(packageName: String) {
-        val intent = Intent(
-            Intent.ACTION_VIEW,
-            "market://details?id=${packageName}".toUri()
-        ).apply {
-            setPackage("com.android.vending")
-        }
-        try {
-            startActivity(intent)
-        } catch (e: Exception) {
-            // Ignore
-        }
-    }
-
 }
+
+
+
 
 
 

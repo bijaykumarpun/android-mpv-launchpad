@@ -101,5 +101,9 @@ dependencies {
     // Billing
     implementation(libs.billing.ktx)
 
+    // In app ratings
+    implementation(libs.review)
+
+
 
 }
