@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<paths xmlns:android="http://schemas.android.com/apk/res/android">
+    <external-path
+        name="external_files"
+        path="." />
+    <!--
+ root-path is suggested in https://stackoverflow.com/q/42516126
+ as a workaround to access files only accessible via root
+ Courtesy of AmazeFileManager
+ -->
+    <root-path
+        name="storage_root"
+        path="." />
+</paths>
