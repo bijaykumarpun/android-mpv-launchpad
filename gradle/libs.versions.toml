@@ -19,6 +19,7 @@ firebaseCrashlytics = "3.0.6"
 
 kotlinxSerializationJson = "1.7.3"
 billingKtx = "8.0.0"
+review = "2.0.2"
 
 
 [libraries]
@@ -48,6 +49,7 @@ firebase-crashlytics = { module = "com.google.firebase:firebase-crashlytics" }
 # Json serialization
 kotlinx-serialization-json = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version.ref = "kotlinxSerializationJson" }
 billing-ktx = { module = "com.android.billingclient:billing-ktx", version.ref = "billingKtx" }
+review = { module = "com.google.android.play:review", version.ref = "review" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
